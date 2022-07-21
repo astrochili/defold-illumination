@@ -1,0 +1,33 @@
+newmtl tiny/brick_14
+map_Kd textures/tiny/brick_14.png
+
+newmtl tiny/brick_21
+map_Kd textures/tiny/brick_21.png
+
+newmtl tiny/brick_26
+map_Kd textures/tiny/brick_26.png
+
+newmtl tiny/element_5
+map_Kd textures/tiny/element_5.png
+
+newmtl tiny/grass_6
+map_Kd textures/tiny/grass_6.png
+
+newmtl tiny/metal_17
+map_Kd textures/tiny/metal_17.png
+
+newmtl tiny/tile_22
+map_Kd textures/tiny/tile_22.png
+
+newmtl tiny/tile_23
+map_Kd textures/tiny/tile_23.png
+
+newmtl tiny/tile_33
+map_Kd textures/tiny/tile_33.png
+
+newmtl tiny/tile_4
+map_Kd textures/tiny/tile_4.png
+
+newmtl tiny/wood_37
+map_Kd textures/tiny/wood_37.png
+

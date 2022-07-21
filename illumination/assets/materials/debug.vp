@@ -1,0 +1,22 @@
+// 
+// debug.vp
+// github.com/astrochili/defold-illumination
+// Copyright (c) 2022 Roman Silin
+// MIT license. See LICENSE for details.
+//
+
+attribute highp vec4 position;
+attribute mediump vec2 texcoord0;
+attribute mediump vec3 normal;
+
+uniform mediump mat4 mtx_worldviewproj;
+
+varying mediump vec3 model_normal;
+varying mediump vec2 texture_coord;
+
+void main() {
+    texture_coord = texcoord0;
+    model_normal = normal;
+
+    gl_Position = mtx_worldviewproj * vec4(position.xyz, 1.0);
+}

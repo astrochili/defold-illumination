@@ -1,0 +1,6 @@
+material: "/illumination/assets/materials/debug.material"
+vertices: "/illumination/assets/models/box.buffer"
+textures: "/illumination/assets/textures/light_point.png"
+primitive_type: PRIMITIVE_TRIANGLES
+position_stream: "position"
+normal_stream: "normal"

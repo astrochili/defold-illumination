@@ -1,0 +1,45 @@
+--
+-- Local
+
+local spectator_mode = false
+local is_flashlight_on = false
+
+local urls = { }
+
+local function handle_window_event(self, event, data)
+  if event == window.WINDOW_EVENT_FOCUS_LOST then
+    msg.post(urls.walker, hash 'pause', { is_paused = true })
+  elseif event == window.WINDOW_EVENT_FOCUS_GAINED then
+    msg.post(urls.walker, hash 'pause', { is_paused = false })
+  end
+end
+
+--
+-- Lifecycle
+
+function init(self)
+  urls.eyes = msg.url('eyes')
+  urls.operator = msg.url('operator/operator')
+  urls.walker = msg.url('#walker')
+  urls.flashlight = msg.url('flashlight')
+  urls.flashlight_script = msg.url('flashlight#light')
+  urls.camera = msg.url('operator/camera')
+
+  msg.post('.', hash 'acquire_input_focus')
+  msg.post(urls.operator, hash 'follow_point', { object = urls.eyes })
+  msg.post(urls.walker, hash 'follow_camera', { camera = urls.operator })
+
+  go.set_parent(urls.flashlight, urls.camera, true)
+  
+  window.set_listener(handle_window_event)
+end
+
+function on_input(self, action_id, action)
+  if action_id == hash 'key_f' and action.released then
+    spectator_mode = not spectator_mode
+    msg.post(urls.walker, hash 'spectator_mode', { is_enabled = spectator_mode } )
+  elseif action_id == hash 'key_e' and action.released then
+    is_flashlight_on = not is_flashlight_on
+    go.set(urls.flashlight_script, 'brightness', is_flashlight_on and 1 or 0)
+  end
+end

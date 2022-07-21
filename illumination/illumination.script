@@ -1,0 +1,119 @@
+--[[
+  illumination.script
+  github.com/astrochili/defold-illumination
+  Copyright (c) 2022 Roman Silin
+  MIT license. See LICENSE for details.
+--]]
+
+local illumination = require 'illumination.illumination'
+local utils = require 'illumination.utils'
+
+--
+-- Properties
+
+go.property('ambient_color', vmath.vector3(1.0, 1.0, 1.0))
+go.property('ambient_level', 0.2)
+go.property('sunlight_color', vmath.vector3(1.0))
+go.property('sunlight_brightness', 1.0)
+go.property('sunlight_specular', 0.5)
+
+go.property('fog', true)
+go.property('fog_is_radial', true)
+go.property('fog_distance_min', 20)
+go.property('fog_distance_max', 30)
+go.property('fog_color', vmath.vector3(0.53, 0.80, 0.92))
+go.property('fog_level', 1.0)
+
+--
+-- Local
+
+local VECTOR_FORWARD = vmath.vector3(0, 0, 1)
+
+--
+-- Lifecycle
+
+function init(self)
+  local self_url = msg.url('#')
+  local data_url = msg.url('#data')
+  
+  illumination.init(data_url, self_url)
+  msg.post(data_url, hash 'disable')
+
+  self.position = go.get_world_position()
+  self.environment = { }
+end
+
+function update(self, dt)
+  local old_environment = self.environment
+  local environment_patch = { }
+
+  -- Patch
+
+  local ambient_color = utils.color_rgba(self.ambient_color, self.ambient_level)
+  if ambient_color ~= old_environment.ambient_color then
+    environment_patch.ambient_color = ambient_color
+  end
+
+  local sunlight_color = utils.color_rgba(self.sunlight_color, self.sunlight_brightness)
+  if sunlight_color ~= old_environment.sunlight_color then
+    environment_patch.sunlight_color = sunlight_color
+  end
+
+  local rotation = go.get_world_rotation(self.url)
+  if rotation ~= old_environment.sunlight_rotation then
+    environment_patch.sunlight_rotation = rotation
+    environment_patch.sunlight_direction = vmath.rotate(rotation, VECTOR_FORWARD)
+  end
+
+  if self.sunlight_specular ~= old_environment.sunlight_specular then
+    environment_patch.sunlight_specular = self.sunlight_specular
+  end
+
+  local fog_type = self.fog and (self.fog_is_radial and illumination.FOG_TYPE_RADIAL or illumination.FOG_TYPE_LINEAR) or illumination.FOG_TYPE_NONE
+  if fog_type ~= old_environment.fog_type then
+    environment_patch.fog_type = fog_type
+  end
+
+  if self.fog_distance_min ~= old_environment.fog_min then
+    environment_patch.fog_min = self.fog_distance_min
+  end
+
+  if self.fog_distance_max ~= old_environment.fog_max then
+    environment_patch.fog_max = self.fog_distance_max
+  end
+
+  local fog_color = utils.color_rgba(self.fog_color, self.fog_level)
+  if fog_color ~= old_environment.fog_color then
+    environment_patch.fog_color = fog_color
+  end
+
+  if next(environment_patch) then
+    illumination.set_environment(environment_patch)
+    utils.patch(old_environment, environment_patch)
+  end
+  
+  if illumination.should_post_update_texture then
+    msg.post('#', hash 'post_update')
+  end
+
+  -- Debug
+
+  if illumination.is_debug() then
+    local ray_from = self.position + 0.125 * self.environment.sunlight_direction * -1
+    local ray_to = ray_from + self.environment.sunlight_direction * -1
+
+    msg.post('@render:', hash 'draw_line', {
+      start_point = ray_from,
+      end_point = ray_to,
+      color = self.environment.sunlight_color
+    })
+  end
+end
+
+function on_message(self, message_id, message, sender)
+  if message_id == hash 'post_update' then
+    illumination.post_update_data_texture()
+  elseif message_id == hash 'debug' then
+    msg.post('#mesh', message.is_enabled and hash('enable') or hash('disable'))
+  end
+end

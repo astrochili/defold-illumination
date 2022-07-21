@@ -1,0 +1,66 @@
+--[[
+  light.script
+  github.com/astrochili/defold-illumination
+  Copyright (c) 2022 Roman Silin
+  MIT license. See LICENSE for details.
+--]]
+
+local illumination = require 'illumination.illumination'
+
+--
+-- Properties
+
+go.property('color', vmath.vector3(1.0))
+go.property('brightness', 1.0)
+go.property('radius', 5.0)
+go.property('specular', 0.5)
+go.property('smoothness', 1.0)
+go.property('cutoff', 1.0)
+
+--
+-- Local
+
+local VECTOR_FORWARD = vmath.vector3(0, 0, 1)
+
+--
+-- Lifecycle
+
+function init(self)
+  self.url = msg.url('#')
+  self.light = { }
+end
+
+function update(self, dt)
+  local old_light = self.light
+  local is_updated = false
+  local color = self.color
+
+  local light = {
+    position = go.get_world_position(),
+    direction = vmath.rotate(go.get_world_rotation(), VECTOR_FORWARD),
+    color = vmath.vector4(color.x, color.y, color.z, self.brightness),
+    radius = self.radius,
+    specular = self.specular,
+    smoothness = self.smoothness,
+    cutoff = self.cutoff,
+  }
+
+  for key, value in pairs(light) do
+    is_updated = is_updated or old_light[key] ~= value
+  end
+
+  if is_updated then
+    illumination.set_light(light, self.url)
+    self.light = light
+  end
+end
+
+function on_message(self, message_id, message, sender)
+  if message_id == hash 'debug' then
+    msg.post('#mesh', message.is_enabled and hash('enable') or hash('disable'))
+  end
+end
+
+function final(self)
+  illumination.set_light(nil, self.url)
+end
