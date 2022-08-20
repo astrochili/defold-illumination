@@ -1,5 +1,5 @@
 ![logo](https://user-images.githubusercontent.com/4752473/185670169-8b27dcab-a6a9-4a9d-b1a7-ab4b136fdd65.jpg)
-[![buymeacoffee](https://user-images.githubusercontent.com/4752473/179627111-617b77b1-f900-4fac-9e03-df73994246ad.svg)](https://www.buymeacoffee.com/astrochili) [![yoomoney](https://user-images.githubusercontent.com/4752473/179627145-7b0fde31-9d1b-4050-933f-82ce3227c617.svg)](https://yoomoney.ru/to/410011261306506) [![twitter](https://user-images.githubusercontent.com/4752473/179627140-c8991473-c4c1-4d6a-9bb1-4dc2117b049f.svg)](https://twitter.com/astronachos) [![telegram](https://user-images.githubusercontent.com/4752473/179627134-0bdcf8a5-7826-4ed2-b8cd-06d0b9792422.svg)](https://t.me/astronachos)
+[![buymeacoffee](https://user-images.githubusercontent.com/4752473/179627111-617b77b1-f900-4fac-9e03-df73994246ad.svg)](https://www.buymeacoffee.com/astrochili) [![tinkoff](https://user-images.githubusercontent.com/4752473/188312285-9162bbed-e50f-40ad-9fbf-a622a80f0249.svg)](https://www.tinkoff.ru/cf/4B9FjHDHA5a) [![twitter](https://user-images.githubusercontent.com/4752473/179627140-c8991473-c4c1-4d6a-9bb1-4dc2117b049f.svg)](https://twitter.com/astronachos) [![telegram](https://user-images.githubusercontent.com/4752473/179627134-0bdcf8a5-7826-4ed2-b8cd-06d0b9792422.svg)](https://t.me/astronachos)
 
 # Illumination
 
@@ -7,15 +7,15 @@
 
 This extension contains ready-to-use forward shading lighting for 3D games made with Defold. Just set the provided material to your mesh and place light sources on the scene.
 
-Technically it supports about ~200 light sources, but the performance limit is about 20-30 sources at a time. Need to implement [clustered forward shading](https://github.com/astrochili/defold-illumination/issues/1) to get a valuable performance boost.
+Technically it supports about ~200 light sources, but the performance limit is about 20-30 sources at the moment. Need to implement [clustered forward shading](https://github.com/astrochili/defold-illumination/issues/1) to get a valuable performance boost.
 
 All the lighting data passed to the shader program as the texture, so it doesn't use a render script.
 
-🎮 [Play HTML5 demo](https://astronachos.com/defold/illumination).
+🎮 [Play HTML5 demo](https://astronachos.com/defold/illumination) with 🔦 on the `E` key.
 
-💬 [Discuss on the forum](#).
+💬 [Discuss on the forum](https://forum.defold.com/t/illumination-ready-to-use-forward-shading-lighting-for-3d-games/71465/2).
 
-🎥 Look at [Operator](https://github.com/astrochili/defold-operator), [Kinematic Walker](https://github.com/astrochili/defold-kinematic-walker) and [TrenchBroom](https://github.com/astrochili/defold-trenchbroom) used in the demo.
+👀 Look at [Operator](https://github.com/astrochili/defold-operator), [Kinematic Walker](https://github.com/astrochili/defold-kinematic-walker) and [TrenchBroom](https://github.com/astrochili/defold-trenchbroom) used in the demo.
 
 ## Features
 
