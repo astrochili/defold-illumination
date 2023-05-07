@@ -986,7 +986,7 @@
 {
 "classname" "light_point"
 "origin" "-460 -210 164"
-"#light._color" "1 0.467964 0"
+"#light.color" "1 0.467964 0"
 "go" "/illumination/light_point.go"
 "id" "fireplace"
 "#light.brightness" "1"
@@ -997,7 +997,7 @@
 {
 "classname" "light_spot"
 "origin" "550 47 239"
-"#light._color" "0.299062 1 0"
+"#light.color" "0.299062 1 0"
 "#light.brightness" "1"
 "#light.cutoff" "0.25"
 "#light.radius" "8"
@@ -1011,7 +1011,7 @@
 {
 "classname" "light_spot"
 "origin" "446 -249 239"
-"#light._color" "1 0.0935073 0.236805"
+"#light.color" "1 0.0935073 0.236805"
 "#light.brightness" "1"
 "#light.cutoff" "0.25"
 "#light.radius" "8"
@@ -1029,6 +1029,6 @@
 "#light.brightness" "1"
 "go" "/illumination/light_point.go"
 "id" "firefly"
-"#light._color" "0 1 1"
+"#light.color" "0 1 1"
 "#light.specular" "1"
 }
