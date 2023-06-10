@@ -1,7 +1,13 @@
 ![logo](https://user-images.githubusercontent.com/4752473/185670169-8b27dcab-a6a9-4a9d-b1a7-ab4b136fdd65.jpg)
-[![buymeacoffee](https://user-images.githubusercontent.com/4752473/179627111-617b77b1-f900-4fac-9e03-df73994246ad.svg)](https://www.buymeacoffee.com/astrochili) [![tinkoff](https://user-images.githubusercontent.com/4752473/188312285-9162bbed-e50f-40ad-9fbf-a622a80f0249.svg)](https://www.tinkoff.ru/cf/4B9FjHDHA5a) [![twitter](https://user-images.githubusercontent.com/4752473/179627140-c8991473-c4c1-4d6a-9bb1-4dc2117b049f.svg)](https://twitter.com/astronachos) [![telegram](https://user-images.githubusercontent.com/4752473/179627134-0bdcf8a5-7826-4ed2-b8cd-06d0b9792422.svg)](https://t.me/astronachos)
+[![astronachos](https://raw.githubusercontent.com/astronachos/astronachos.github.io/master/static/badges/astronachos.svg)](https://astronachos.com) [![twitter](https://raw.githubusercontent.com/astronachos/astronachos.github.io/master/static/badges/twitter.svg)](https://twitter.com/astronachos) [![telegram](https://raw.githubusercontent.com/astronachos/astronachos.github.io/master/static/badges/telegram.svg)](https://t.me/astronachos) [![buymeacoffee](https://raw.githubusercontent.com/astronachos/astronachos.github.io/master/static/badges/buymeacoffee.svg)](https://www.buymeacoffee.com/astrochili) [![tinkoff](https://raw.githubusercontent.com/astronachos/astronachos.github.io/master/static/badges/tinkoff.svg)](https://www.tinkoff.ru/cf/4B9FjHDHA5a)
 
 # Illumination
+
+📼 Also in this series:
+- 👖 [Kinematic Walker](https://github.com/astrochili/defold-kinematic-walker)
+- 🎥 [Operator](https://github.com/astrochili/defold-operator)
+- 🏗️ [TrenchBroom](https://github.com/astrochili/defold-trenchbroom)
+- 🚧 [Blockout Textures](https://github.com/astrochili/blockout-textures)
 
 ## Overview
 
@@ -14,8 +20,6 @@ All the lighting data passed to the shader program as the texture, so it doesn't
 🎮 [Play HTML5 demo](https://astronachos.com/defold/illumination) with 🔦 on the `E` key.
 
 💬 [Discuss on the forum](https://forum.defold.com/t/illumination-ready-to-use-forward-shading-lighting-for-3d-games/71465/2).
-
-👀 Look at [Operator](https://github.com/astrochili/defold-operator), [Kinematic Walker](https://github.com/astrochili/defold-kinematic-walker) and [TrenchBroom](https://github.com/astrochili/defold-trenchbroom) used in the demo.
 
 ## Features
 
