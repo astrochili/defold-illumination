@@ -1,0 +1,10 @@
+material: "/illumination/materials/model.material"
+vertices: "/example/assets/maps/garden/buffer/worldspawn_tiny_tile_33.buffer"
+textures: "/example/assets/textures/tiny/tile_33.png"
+textures: "/illumination/textures/data.png"
+textures: "/illumination/textures/empty.png"
+textures: "/example/assets/textures/maps/tile_33_specular.png"
+textures: "/example/assets/textures/maps/tile_33_normal.png"
+primitive_type: PRIMITIVE_TRIANGLES
+position_stream: "position"
+normal_stream: "normal"
