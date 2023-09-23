@@ -201,6 +201,7 @@ Fragment constant to pass some surface properties.
 
 - `x` — the surface shininess. Impacts the scattering of the specular highlight. Default value is `32.0`.
 - `y` — using separate uvs for the light map. Set to `1.0` to use the stream `texcoord1` as light map uv coordinates. By default it's `0.0` and uses the `texcoord0` stream.
+- `z` — use the OpenGL or DirectX normal maps format. Set to `1.0` to use DirectX format where green is down. By default it's `0.0` and uses the OpenGL format where green is top.
 
 ## Module
 

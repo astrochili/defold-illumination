@@ -52,15 +52,9 @@ mat3 get_tbn_mtx(vec3 normal, vec3 view_direction, vec2 texture_coord) {
     vec3 d_vd_x = dFdx(view_direction);
     vec2 d_tc_x = dFdx(texture_coord);
 
-    #ifdef GL_ES
-        vec3 d_vd_y = dFdy(-view_direction);
-        vec2 d_tc_y = dFdy(-texture_coord);
-    #else
-        vec3 d_vd_y = dFdy(view_direction);
-        vec2 d_tc_y = dFdy(texture_coord);
-    #endif
+    vec3 d_vd_y = dFdy(view_direction);
+    vec2 d_tc_y = dFdy(texture_coord);
 
- 
     vec3 d_vd_y_cross = cross(d_vd_y, normal);
     vec3 d_vd_x_cross = cross(normal, d_vd_x);
 
@@ -78,7 +72,11 @@ vec3 get_perturb_normal(vec3 world_normal, vec3 view_direction, vec2 texture_coo
 
     vec3 normal_map_color = texture2D(NORMAL_TEXTURE, texture_coord).xyz;
     vec3 perturb_normal = normal_map_color * (255.0 / 127.0) - vec3(128.0 / 127.0);
-    perturb_normal.y = -perturb_normal.y;
+
+    if (surface.z > 0.5) {
+        // This is the DirectX normals map format
+        perturb_normal.y = -perturb_normal.y;
+    }
 
     return normalize(tbn_mtx * perturb_normal);
 }
