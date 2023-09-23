@@ -195,6 +195,8 @@ A normal map texture with green on the top.
 
 - `/illumination/textures/empty.png` to skip it.
 
+OpenGL normal maps format used by default. To use DirectX format turn on [surface.z](#surface) constant.
+
 ### surface
 
 Fragment constant to pass some surface properties.
