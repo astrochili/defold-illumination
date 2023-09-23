@@ -53,7 +53,7 @@ end
 
 function utils.vector3_to_9_uint8(position, axis_bound)
   local proportion_to_uint24 = 2 * axis_bound / MAX_UINT24
-  
+
   local x = (axis_bound + position.x) / proportion_to_uint24
   local y = (axis_bound + position.y) / proportion_to_uint24
   local z = (axis_bound + position.z) / proportion_to_uint24

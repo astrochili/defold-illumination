@@ -1,4 +1,4 @@
-// 
+//
 // model.fp
 // github.com/astrochili/defold-illumination
 // Copyright (c) 2022 Roman Silin
@@ -36,7 +36,7 @@ vec4 get_data(float index) {
     return texture2D(DATA_TEXTURE, vec2(x, y));
 }
 
-float data_to_axis(vec3 data) {    
+float data_to_axis(vec3 data) {
     float r = 255.0 * data.r * 256.0 * 256.0;
     float g = 255.0 * data.g * 256.0;
     float b = 255.0 * data.b;
@@ -44,7 +44,7 @@ float data_to_axis(vec3 data) {
 
     value = value - (max_uint24 * 0.5);
     value = value * (axis_capacity / max_uint24);
-    
+
     return value;
 }
 
@@ -66,7 +66,7 @@ mat3 get_tbn_mtx(vec3 normal, vec3 view_direction, vec2 texture_coord) {
 
     vec3 tangent = d_vd_y_cross * d_tc_x.x + d_vd_x_cross * d_tc_y.x;
     vec3 bitangent = d_vd_y_cross * d_tc_x.y + d_vd_x_cross * d_tc_y.y;
- 
+
     float inv_max = inversesqrt(max(dot(tangent, tangent), dot(bitangent, bitangent)));
     mat3 tbn_mtx = mat3(tangent * inv_max, bitangent * inv_max, normal);
 
@@ -87,7 +87,7 @@ float get_fog_factor(float distance, float fog_min, float fog_max) {
     if (distance >= fog_max) {
         return 1.0;
     }
-    
+
     if (distance <= fog_min) {
         return 0.0;
     }
@@ -101,7 +101,7 @@ vec3 get_specular_color(vec3 map_specular, float light_specular, vec3 light_colo
     }
 
     float lambertian = max(dot(light_direction, surface_normal), 0.0);
-    
+
     if (lambertian <= 0.0) {
         return vec3(0.0);
     }
@@ -118,7 +118,7 @@ void main() {
 
     //
     // Texture
-    
+
     vec4 texture_color = texture2D(DIFFUSE_TEXTURE, texture_coord);
 
     if (texture_color.a == 0.0) {
@@ -126,7 +126,7 @@ void main() {
     }
 
     vec3 color = texture_color.rgb;
-    
+
 
     //
     // Defold Editor
@@ -136,9 +136,9 @@ void main() {
     if (meta_1.r == 0.0) {
         vec3 editor_ambient = vec3(0.8);
         vec3 editor_diffuse = vec3(1.0) - editor_ambient;
-        
+
         editor_diffuse = editor_ambient + editor_diffuse * world_normal.y;
-        
+
         gl_FragColor = vec4(color.rgb * editor_diffuse.rgb, 1.0);
 
         // If the first byte is zero, it's the editor,
@@ -219,14 +219,14 @@ void main() {
         vec3 sunlight_direction = meta_4.rgb * 2.0 - vec3(1.0);
         float sunlight_shininess = max(dot(surface_normal, sunlight_direction), 0.0);
         vec3 sunlight_color = meta_3.rgb * meta_3.w * sunlight_shininess;
-        
+
         float sunlight_specular = meta_4.a;
         vec3 sunlight_specular_color = get_specular_color(specular_map_color, sunlight_specular, sunlight_color, sunlight_direction, surface_normal, view_direction);
 
         illuminance_color = illuminance_color + sunlight_color;
         specular_color = specular_color + sunlight_specular_color;
     }
-    
+
 
     //
     // Lights
@@ -239,7 +239,7 @@ void main() {
         vec4 light_4 = get_data(p + 3.0);
 
         float light_radius = light_2.r * 255.0;
-        
+
         vec3 light_position = vec3(
             data_to_axis(vec3(light_2.a, light_3.rg)),
             data_to_axis(vec3(light_3.ba, light_4.r)),
@@ -247,7 +247,7 @@ void main() {
         );
 
         float light_distance = length(light_position - world_position);
-        
+
         if (light_distance > light_radius) {
             // Skip this light source because of distance
             continue;
@@ -290,9 +290,9 @@ void main() {
 
             if (light_smoothness > 0.0) {
                 float spot_cutoff_inner = (spot_cutoff + 1.0) * (1.0 - light_smoothness) - 1.0;
-                float spot_epsilon = spot_cutoff_inner - spot_cutoff;            
+                float spot_epsilon = spot_cutoff_inner - spot_cutoff;
                 float spot_intensity = clamp((spot_cutoff - spot_theta) / spot_epsilon, 0.0, 1.0);
-                
+
                 light_illuminance_color = light_illuminance_color * spot_intensity;
                 light_specular_color = light_specular_color * spot_intensity;
             }

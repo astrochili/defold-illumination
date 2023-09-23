@@ -52,7 +52,7 @@ local data_buffer
 local data_stream
 
 local data_texture_path
-local data_texture_header = { 
+local data_texture_header = {
   width = data_texture_size,
   height = data_texture_size,
   type = resource.TEXTURE_TYPE_2D,
@@ -103,7 +103,7 @@ local function update_environment(environment)
       direction = vmath.normalize(direction)
       direction = (direction + vmath.vector3(1)) * 255 / 2
     end
-  
+
     data_stream[13] = direction.x
     data_stream[14] = direction.y
     data_stream[15] = direction.z
@@ -222,7 +222,7 @@ local function delete_light(url)
 
   for url, index in pairs(light_index_by_url) do
     if index > removed_index then
-      light_index_by_url[url] = index - 1    
+      light_index_by_url[url] = index - 1
     end
   end
 
@@ -292,20 +292,20 @@ end
 -- Internal functions
 
 function illumination.init(data_url, sender)
-  local buffer_declaration = { 
-    name = HASH_RGBA, 
-    type = buffer.VALUE_TYPE_UINT8, 
+  local buffer_declaration = {
+    name = HASH_RGBA,
+    type = buffer.VALUE_TYPE_UINT8,
     count = data_pixel_length
   }
 
   script_url = sender
   msg.post(script_url, hash 'debug', { is_enabled = is_debug })
-  
+
   data_buffer = buffer.create(data_buffer_size, { buffer_declaration })
   data_stream = buffer.get_stream(data_buffer, HASH_RGBA)
 
   update_meta()
-  
+
   data_texture_path = go.get(data_url, TEXTURE_DATA)
   resource.set_texture(data_texture_path, data_texture_header, data_buffer)
 end

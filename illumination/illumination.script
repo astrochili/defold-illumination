@@ -35,7 +35,7 @@ local VECTOR_FORWARD = vmath.vector3(0, 0, 1)
 function init(self)
   local self_url = msg.url('#')
   local data_url = msg.url('#data')
-  
+
   illumination.init(data_url, self_url)
   msg.post(data_url, hash 'disable')
 
@@ -91,7 +91,7 @@ function update(self, dt)
     illumination.set_environment(environment_patch)
     utils.patch(old_environment, environment_patch)
   end
-  
+
   if illumination.should_post_update_texture then
     msg.post('#', hash 'post_update')
   end

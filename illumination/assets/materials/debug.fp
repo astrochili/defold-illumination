@@ -1,4 +1,4 @@
-// 
+//
 // debug.fp
 // github.com/astrochili/defold-illumination
 // Copyright (c) 2022 Roman Silin
@@ -12,7 +12,7 @@ uniform lowp sampler2D DIFFUSE_TEXTURE;
 
 void main() {
     vec4 color = texture2D(DIFFUSE_TEXTURE, texture_coord.xy);
-    
+
     vec3 ambient = vec3(0.8);
     vec3 diffuse = vec3(1.0) - ambient;
 

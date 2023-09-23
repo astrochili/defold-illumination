@@ -30,7 +30,7 @@ function init(self)
   msg.post(urls.walker, hash 'follow_camera_rotation', { camera = urls.operator })
 
   go.set_parent(urls.flashlight, urls.camera, true)
-  
+
   window.set_listener(handle_window_event)
 end
 
