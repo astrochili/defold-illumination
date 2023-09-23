@@ -214,7 +214,7 @@ void main() {
     if (meta_3.a > 0.0) {
         vec4 meta_4 = get_data(3.0);
 
-        vec3 sunlight_direction = meta_4.rgb * 2.0 - vec3(1.0);
+        vec3 sunlight_direction = normalize(meta_4.rgb * 2.0 - vec3(1.0));
         float sunlight_shininess = max(dot(surface_normal, sunlight_direction), 0.0);
         vec3 sunlight_color = meta_3.rgb * meta_3.w * sunlight_shininess;
 
