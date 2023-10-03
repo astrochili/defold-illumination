@@ -13,7 +13,7 @@
 📼 Also in this series:
 - 👖 [Kinematic Walker](https://github.com/astrochili/defold-kinematic-walker)
 - 🎥 [Operator](https://github.com/astrochili/defold-operator)
-- 🏗️ [TrenchBroom](https://github.com/astrochili/defold-trenchbroom)
+- 🏗️ [TrenchFold](https://github.com/astrochili/defold-trenchfold)
 - 🚧 [Blockout Textures](https://github.com/astrochili/blockout-textures)
 
 ## Overview
@@ -259,9 +259,9 @@ illumination.set_light(nil, light_url)
 
 ## TrenchBroom
 
-[TrenchBroom extension](https://github.com/astrochili/defold-trenchbroom#illumination-light_point-light_spot) contains entities `illumination`, `light_point` and `light_spot` to configure lighting directly on the map.
+[TrenchFold](https://github.com/astrochili/defold-trenchfold#illumination-light_point-light_spot) extension contains entities `illumination`, `light_point` and `light_spot` to configure lighting directly on the map.
 
-To assign textures to meshes use [texture path patterns](https://github.com/astrochili/defold-trenchbroom#texture-path-patterns):
+To assign textures to meshes use [texture path patterns](https://github.com/astrochili/defold-trenchfold#texture-path-patterns):
 
 - `texture1` — `/illumination/textures/data.png`
 - `texture2` — `*_light.png` or `/illumination/textures/empty.png`
