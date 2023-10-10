@@ -11,7 +11,6 @@
 "texture2" "/illumination/textures/empty.png"
 "texture3" "/assets/textures/maps/*_specular"
 "texture4" "/assets/textures/maps/*_normal"
-"#scene" "/example/scene.script"
 // brush 0
 {
 ( -128 -32 0 ) ( -128 -1312 0 ) ( -128 -32 -32 ) tiny/tile_23 0 0 0 1 1
@@ -951,24 +950,6 @@
 }
 // entity 1
 {
-"classname" "illumination"
-"origin" "0 0 672"
-"rotation" "-45 -45 0"
-"go" "/illumination/illumination.go"
-"#illumination.ambient_color" "0 0 0"
-"#illumination.ambient_level" "0"
-"#illumination.fog" "true"
-"#illumination.fog_color" "0 0 0"
-"#illumination.fog_distance_max" "15"
-"#illumination.fog_distance_min" "5"
-"#illumination.fog_is_radial" "true"
-"#illumination.fog_level" "1"
-"#illumination.sunlight_brightness" "0"
-"#illumination.sunlight_color" "0 0 0"
-"#illumination.sunlight_specular" "1"
-}
-// entity 2
-{
 "classname" "static"
 "texture2" "/assets/textures/maps/*_light"
 "texture3" "/illumination/textures/empty.png"
@@ -982,7 +963,7 @@
 ( -440.80816411546914 -265.3725830020305 96 ) ( -440.80816411546914 -265.3725830020305 192 ) ( -432.5259546721883 -234.46295656078036 96 ) tiny/element_5 -45.266083 -32 0 0.9659258 1
 }
 }
-// entity 3
+// entity 2
 {
 "classname" "light_point"
 "origin" "-460 -210 164"
@@ -993,7 +974,7 @@
 "#light.radius" "5"
 "#light.specular" "1"
 }
-// entity 4
+// entity 3
 {
 "classname" "light_spot"
 "origin" "550 47 239"
@@ -1007,7 +988,7 @@
 "id" "light_green"
 "rotation" "-90 0 50"
 }
-// entity 5
+// entity 4
 {
 "classname" "light_spot"
 "origin" "446 -249 239"
@@ -1021,7 +1002,7 @@
 "id" "light_red"
 "rotation" "-90 0 50"
 }
-// entity 6
+// entity 5
 {
 "classname" "light_point"
 "origin" "492 813 139"

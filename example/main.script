@@ -1,0 +1,114 @@
+--[[
+  main.script
+  github.com/astrochili/defold-illumination
+  Copyright (c) 2022 Roman Silin
+  MIT license. See LICENSE for details.
+--]]
+
+local illumination = require "illumination.illumination"
+
+--
+-- Local
+
+local function run_daycycle(self, daycycle, index)
+  local target = daycycle[index or 1]
+  local duration = index and target.duration or 0
+  local index = index or 1
+
+  go.animate(self.urls.illumination_go, hash 'euler', go.PLAYBACK_ONCE_FORWARD, target.sunlight_direction, go.EASING_LINEAR, duration, 0, function()
+    run_daycycle(self, daycycle, index == #daycycle and 1 or (index + 1))
+  end)
+
+  go.cancel_animations(self.urls.illumination)
+
+  go.animate(self.urls.illumination, 'sunlight_color', go.PLAYBACK_ONCE_FORWARD, target.sunlight_color, go.EASING_LINEAR, duration)
+  go.animate(self.urls.illumination, 'sunlight_brightness', go.PLAYBACK_ONCE_FORWARD, target.sunlight_brightness, go.EASING_LINEAR, duration)
+  go.animate(self.urls.illumination, 'ambient_color', go.PLAYBACK_ONCE_FORWARD, target.ambient_color, go.EASING_LINEAR, duration)
+  go.animate(self.urls.illumination, 'ambient_level', go.PLAYBACK_ONCE_FORWARD, target.ambient_level, go.EASING_LINEAR, duration)
+  go.animate(self.urls.illumination, 'fog_color', go.PLAYBACK_ONCE_FORWARD, target.fog_color, go.EASING_LINEAR, duration)
+end
+
+--
+-- Lifecycle
+
+function init(self)
+  self.urls = {
+    go = msg.url('.'),
+    gui = msg.url('gui'),
+    illumination_go = msg.url('illumination'),
+    illumination = msg.url('illumination#illumination'),
+    firefly = msg.url('/garden/firefly'),
+    firefly_light = msg.url('/garden/firefly#light'),
+    fireplace = msg.url('/garden/fireplace#light'),
+    spot_red = msg.url('/garden/light_red'),
+    spot_green = msg.url('/garden/light_green'),
+    operator = msg.url('/player/operator/operator')
+  }
+
+  local daycycle = {
+    {
+      sunlight_direction = vmath.vector3(-179, 20, 0),
+      sunlight_color = vmath.vector3(0.1, 0.1, 0.3),
+      sunlight_brightness = 0.5,
+      ambient_color = vmath.vector3(0.5, 0.5, 1.0),
+      ambient_level = 0.1,
+      fog_color = vmath.vector3(0, 0, 0.1),
+      duration = 10
+    }, {
+      sunlight_direction = vmath.vector3(-70, 90, 0),
+      sunlight_color = vmath.vector3(1, 1, 1),
+      sunlight_brightness = 1,
+      ambient_color = vmath.vector3(1, 1, 1),
+      ambient_level = 0.3,
+      fog_color = vmath.vector3(0.53, 0.8, 0.92),
+      duration = 15
+    }, {
+      sunlight_direction = vmath.vector3(0, 20, 0),
+      sunlight_color = vmath.vector3(0.5, 0.2, 0),
+      sunlight_brightness = 1,
+      ambient_color = vmath.vector3(0.5, 0.2, 0),
+      ambient_level = 0.1,
+      fog_color = vmath.vector3(0.3, 0.2, 0),
+      duration = 10
+    }, {
+      sunlight_direction = vmath.vector3(0, 20, 0),
+      sunlight_color = vmath.vector3(0.318, 0.261, 0.413),
+      sunlight_brightness = 0,
+      ambient_color = vmath.vector3(0.318, 0.261, 0.413),
+      ambient_level = 0.1,
+      fog_color = vmath.vector3(0, 0, 0.1),
+      duration = 5
+    }
+  }
+
+  run_daycycle(self, daycycle)
+
+  go.animate(self.urls.spot_red, 'euler.y', go.PLAYBACK_LOOP_FORWARD, 360, go.EASING_LINEAR, 10, 0)
+  go.animate(self.urls.spot_red, 'euler.z', go.PLAYBACK_LOOP_PINGPONG, -50, go.EASING_INOUTQUAD, 5, 0)
+  go.animate(self.urls.spot_green, 'euler.y', go.PLAYBACK_LOOP_FORWARD, 360, go.EASING_LINEAR, 12, 0)
+  go.animate(self.urls.spot_green, 'euler.z', go.PLAYBACK_LOOP_PINGPONG, -50, go.EASING_INOUTQUAD, 5, 0)
+  go.animate(self.urls.fireplace, 'brightness', go.PLAYBACK_LOOP_PINGPONG, 0.8, go.EASING_INOUTQUAD, 1, 0)
+  go.animate(self.urls.firefly, 'position', go.PLAYBACK_LOOP_PINGPONG, vmath.vector3(-6, 1, -4), go.EASING_INOUTQUAD, 25, 0)
+
+  illumination.set_debug(true)
+
+  self.is_profiler_enabled = false
+  self.is_gui_enabled = true
+  msg.post(self.urls.go, hash 'acquire_input_focus')
+end
+
+function on_input(self, action_id, action)
+  if action_id == hash 'key_esc' and action.released then
+    msg.post(self.urls.operator, hash 'internal_control', { is_enabled = false })
+  elseif action_id == hash 'touch' and action.pressed then
+    msg.post(self.urls.operator, hash 'internal_control', { is_enabled = true })
+  elseif action_id == hash 'key_h' and action.released then
+    self.is_gui_enabled = not self.is_gui_enabled
+    msg.post(self.urls.gui, self.is_gui_enabled and hash 'enable' or hash 'disable')
+  elseif action_id == hash 'key_p' and action.released then
+    self.is_profiler_enabled = not self.is_profiler_enabled
+    profiler.enable_ui(self.is_profiler_enabled)
+  elseif action_id == hash 'key_l' and action.released then
+    illumination.set_debug(not illumination.is_debug())
+  end
+end

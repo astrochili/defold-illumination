@@ -1,4 +1,67 @@
 name: "main"
+instances {
+  id: "illumination"
+  prototype: "/illumination/illumination.go"
+  position {
+    x: 0.0
+    y: 5.25
+    z: 0.0
+  }
+  rotation {
+    x: -0.35355338
+    y: -0.35355338
+    z: -0.14644662
+    w: 0.8535534
+  }
+  component_properties {
+    id: "illumination"
+    properties {
+      id: "ambient_color"
+      value: "0.0, 0.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+    properties {
+      id: "ambient_level"
+      value: "0.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "sunlight_color"
+      value: "0.0, 0.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+    properties {
+      id: "sunlight_brightness"
+      value: "0.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "sunlight_specular"
+      value: "1.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "fog_distance_min"
+      value: "5.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "fog_distance_max"
+      value: "15.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "fog_color"
+      value: "0.0, 0.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
 collection_instances {
   id: "player"
   collection: "/example/player.collection"
@@ -41,10 +104,65 @@ collection_instances {
 }
 scale_along_z: 0
 embedded_instances {
+  id: "main"
+  children: "gui"
+  data: "components {\n"
+  "  id: \"main\"\n"
+  "  component: \"/example/main.script\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "  property_decls {\n"
+  "  }\n"
+  "}\n"
+  "components {\n"
+  "  id: \"pointer_lock\"\n"
+  "  component: \"/pointer_lock/pointer_lock.script\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "  property_decls {\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
   id: "gui"
   data: "components {\n"
-  "  id: \"hint\"\n"
-  "  component: \"/example/hint.gui\"\n"
+  "  id: \"main\"\n"
+  "  component: \"/example/main.gui\"\n"
   "  position {\n"
   "    x: 0.0\n"
   "    y: 0.0\n"

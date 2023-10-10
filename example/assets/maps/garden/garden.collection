@@ -1,83 +1,5 @@
 name: "garden"
 instances {
-  id: "illumination"
-  prototype: "/illumination/illumination.go"
-  position {
-    x: 0.0
-    y: 5.25
-    z: 0.0
-  }
-  rotation {
-    x: -0.35355338
-    y: -0.35355338
-    z: -0.14644662
-    w: 0.8535534
-  }
-  component_properties {
-    id: "illumination"
-    properties {
-      id: "ambient_color"
-      value: "0.0, 0.0, 0.0"
-      type: PROPERTY_TYPE_VECTOR3
-    }
-    properties {
-      id: "ambient_level"
-      value: "0.0"
-      type: PROPERTY_TYPE_NUMBER
-    }
-    properties {
-      id: "sunlight_color"
-      value: "0.0, 0.0, 0.0"
-      type: PROPERTY_TYPE_VECTOR3
-    }
-    properties {
-      id: "sunlight_brightness"
-      value: "0.0"
-      type: PROPERTY_TYPE_NUMBER
-    }
-    properties {
-      id: "sunlight_specular"
-      value: "1.0"
-      type: PROPERTY_TYPE_NUMBER
-    }
-    properties {
-      id: "fog"
-      value: "true"
-      type: PROPERTY_TYPE_BOOLEAN
-    }
-    properties {
-      id: "fog_is_radial"
-      value: "true"
-      type: PROPERTY_TYPE_BOOLEAN
-    }
-    properties {
-      id: "fog_distance_min"
-      value: "5.0"
-      type: PROPERTY_TYPE_NUMBER
-    }
-    properties {
-      id: "fog_distance_max"
-      value: "15.0"
-      type: PROPERTY_TYPE_NUMBER
-    }
-    properties {
-      id: "fog_color"
-      value: "0.0, 0.0, 0.0"
-      type: PROPERTY_TYPE_VECTOR3
-    }
-    properties {
-      id: "fog_level"
-      value: "1.0"
-      type: PROPERTY_TYPE_NUMBER
-    }
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
-instances {
   id: "fireplace"
   prototype: "/illumination/light_point.go"
   position {
@@ -370,7 +292,6 @@ embedded_instances {
 }
 embedded_instances {
   id: "entities"
-  children: "illumination"
   children: "light_point"
   children: "light_spot"
   children: "static"
@@ -2012,23 +1933,6 @@ embedded_instances {
   "components {\n"
   "  id: \"worldspawn_b49_static\"\n"
   "  component: \"/example/assets/maps/garden/collisionobject/worldspawn_b49_static.collisionobject\"\n"
-  "  position {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "  }\n"
-  "  rotation {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "    w: 1.0\n"
-  "  }\n"
-  "  property_decls {\n"
-  "  }\n"
-  "}\n"
-  "components {\n"
-  "  id: \"scene\"\n"
-  "  component: \"/example/scene.script\"\n"
   "  position {\n"
   "    x: 0.0\n"
   "    y: 0.0\n"

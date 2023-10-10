@@ -1,3 +1,14 @@
+--[[
+  example.render_script
+  github.com/astrochili/defold-illumination
+
+  Copyright (c) 2022 Roman Silin
+  MIT license. See LICENSE for details.
+--]]
+
+--
+-- Lifecycle
+
 function init(self)
   self.clear_color = vmath.vector4()
 
