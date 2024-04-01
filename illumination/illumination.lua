@@ -39,7 +39,7 @@ illumination.FOG_TYPE_RADIAL = 2
 -- Local Properties
 
 local HASH_RGBA = hash 'rgba'
-local TEXTURE_DATA = hash 'texture1'
+local TEXTURE_DATA = hash 'texture0'
 
 local position_axis_bound = 2048 -- the same is in the fragment shader
 local data_texture_size = 32 -- the same is in the fragment shader
