@@ -39,7 +39,7 @@ illumination.FOG_TYPE_RADIAL = 2
 -- Local Properties
 
 local HASH_RGBA = hash 'rgba'
-local TEXTURE_DATA = hash 'texture0'
+local TEXTURE_DATA = hash 'texture1'
 
 local position_axis_bound = 2048 -- the same is in the fragment shader
 local data_texture_size = 32 -- the same is in the fragment shader
@@ -55,8 +55,8 @@ local data_texture_path
 local data_texture_header = {
   width = data_texture_size,
   height = data_texture_size,
-  type = resource.TEXTURE_TYPE_2D,
-  format = resource.TEXTURE_FORMAT_RGBA,
+  type = graphics.TEXTURE_TYPE_2D,
+  format = graphics.TEXTURE_FORMAT_RGBA,
   num_mip_maps = 0
 }
 
